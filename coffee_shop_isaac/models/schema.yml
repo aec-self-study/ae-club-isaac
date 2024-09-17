@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: customers
+    description: "combines customer data and order info to database"
+    columns:
+      - name: customer_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: domain_orders
+    description: "pulls order data by domain"
+    columns:
+      - name: domain
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['gmail.com', 'yahoo.com']
+
+  - name: product_offerings
+    description: "{{ doc('product_offerings') }}"
+    columns:
+      - name: category
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+sources: 
+ - name: coffee_shop
+   project: analytics-engineers-club
+   freshness:
+      warn_after:
+        count: 1
+        period: minute
+   loaded_at_field: created_at
+
+   tables:
+     - name: customers
+       description: "combines customer data and order info to database"
+       columns:
+         - name: id
+           tests:
+             - unique
+             - not_null
+     - name: orders
+       description: "pulls order data by domain"
+       columns:
+         - name: id
+           tests:
+             - unique
+             - not_null
+     - name: products
+       description: "{{ doc('product_offerings') }}"
+       columns:
+         - name: id
+           tests:
+             - unique
+             - not_null

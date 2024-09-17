@@ -9,14 +9,14 @@ select
   orders.first_order_at,
   orders.number_of_orders
 from 
-  `analytics-engineers-club.coffee_shop.customers` customers
+  {{source('coffee_shop','customers')}} customers
 left join (
   select
     customer_id,
     min(created_at) first_order_at,
     count(id) number_of_orders
   from
-    `analytics-engineers-club.coffee_shop.orders` 
+    {{source('coffee_shop','orders')}} orders
   group by
     customer_id 
 ) orders on customers.id = orders.customer_id

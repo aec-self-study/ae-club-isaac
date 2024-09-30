@@ -1,0 +1,31 @@
+version: 2
+
+sources: 
+  - name: coffee_shop
+    database: analytics-engineers-club
+    tables: 
+      - name: orders 
+        description: 'this table has additional order information like addresses'
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
+      - name: products 
+        description: 'there is more product information in the product_prices table'
+        columns: 
+          - name: id 
+            tests: 
+              - unique
+              - not_null
+      - name: order_items
+        description: 'this table contains product ids and order ids'
+        columns: 
+          - name: id 
+            description: this column is the primary key, not an order or product id
+            tests: 
+              - unique
+              - not_null
+
+
+

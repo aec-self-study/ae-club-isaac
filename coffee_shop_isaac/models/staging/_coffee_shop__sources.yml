@@ -8,14 +8,14 @@ sources:
         description: 'this table has additional order information like addresses'
         columns: 
           - name: id 
-            tests: 
+            data_tests: 
               - unique
               - not_null
       - name: products 
         description: 'there is more product information in the product_prices table'
         columns: 
           - name: id 
-            tests: 
+            data_tests: 
               - unique
               - not_null
       - name: order_items
@@ -23,7 +23,7 @@ sources:
         columns: 
           - name: id 
             description: this column is the primary key, not an order or product id
-            tests: 
+            data_tests: 
               - unique
               - not_null
 

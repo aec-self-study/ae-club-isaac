@@ -26,6 +26,16 @@ sources:
             data_tests: 
               - unique
               - not_null
+          - name: revenue
+            description: this is total order revenue, not by product
+              - not_null
+      - name: product_prices 
+        description: 'this table has product prices by datetime'
+        columns: 
+          - name: id 
+            data_tests: 
+              - unique
+              - not_null
 
 
 

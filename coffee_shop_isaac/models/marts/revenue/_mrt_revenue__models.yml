@@ -1,0 +1,13 @@
+version: 2
+
+models: 
+  - name: products
+    description: "Mart model with product level information for each order. This model is used to calculate revenue at different product
+    dimensions and over different time periods."
+    columns: 
+      - name: order_product_id
+        description: "a combination of the order id and product id, hashed to md5"
+        data_type: string
+        data_tests: 
+          - unique
+          - not_null

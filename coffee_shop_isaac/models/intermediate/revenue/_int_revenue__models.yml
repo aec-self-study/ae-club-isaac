@@ -1,0 +1,31 @@
+version: 2
+
+models: 
+  - name: int_calculate_product_volume_per_order
+    description: "Intermediate model to calculate the number of each product ordered in an order id"
+    columns: 
+      - name: order_product_id
+        description: "a combination of the order id and product id, hashed to md5"
+        data_type: string
+        data_tests: 
+          - unique
+          - not_null
+      - name: n_items_ordered
+        description: "the number of products by order id"
+        data_type: int
+        data_tests: 
+          - not_null
+          - non_negative
+
+  - name: int_determine_product_revenue_at_order_time
+    description: "Intermediate model to determine product price and total revenue at order time.
+    uses a case when to determine which price the product had at the time of the order, then filters
+    the product data to only the relevant product price at the time of order."
+    columns:
+      - name: order_product_id
+        description: "a combination of the order id and product id, hashed to md5"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+

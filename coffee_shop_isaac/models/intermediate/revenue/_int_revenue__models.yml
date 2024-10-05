@@ -1,6 +1,7 @@
 version: 2
 
 models: 
+
   - name: int_calculate_product_volume_per_order
     description: "Intermediate model to calculate the number of each product ordered in an order id"
     columns: 
@@ -24,6 +25,16 @@ models:
     columns:
       - name: order_product_id
         description: "a combination of the order id and product id, hashed to md5"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_calculate_lifetime_order_number
+    description: "Intermediate model to calculate the number of orders a customer has made at the time of order"
+    columns:
+      - name: order_customer_id
+        description: "a combination of the order id and customer id, hashed to md5"
         data_type: string
         data_tests:
           - unique

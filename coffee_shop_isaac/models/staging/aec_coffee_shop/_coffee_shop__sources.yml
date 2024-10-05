@@ -36,6 +36,13 @@ sources:
             data_tests: 
               - unique
               - not_null
+      - name: customers 
+        description: 'this table has names and emails for customers'
+        columns: 
+          - name: id 
+            data_tests: 
+              - unique
+              - not_null
 
 
 

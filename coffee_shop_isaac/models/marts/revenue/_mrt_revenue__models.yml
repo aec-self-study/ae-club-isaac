@@ -25,7 +25,23 @@ models:
 
   - name: pageviews
     description: "Mart model with pageview information for the website. One visitor id per customer id"
-    columns: 
+    columns:
+      - name: pageview_id
+        description: "unique id for each pageview"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
       - name: visitor_id
         description: "this is the first visitor id for each customer"
         data_type: string
+
+  - name: sessions
+    description: "Mart model with session level information."
+    columns:
+      - name: session_id
+        description: "unique id for each session"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null

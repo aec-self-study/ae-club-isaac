@@ -50,3 +50,14 @@ models:
           - unique
           - not_null
 
+  - name: int_assign_session_ids
+    description: "Intermediate model to assign session ids based on 30 minute activity windows"
+    columns:
+      - name: pageview_id
+        description: "a combination of the order id and visitor id, hashed to md5"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+
+

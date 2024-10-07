@@ -1,25 +1,16 @@
-with stg_coffee_shop__pageviews as (
-
-    select * from {{ ref('stg_web_tracking__pageviews') }}
-), 
-
-get_first_visitor_id as(
-
-    select * from {{ ref('int_get_first_web_visitor_id') }}
-
+with pageviews_with_session_ids as(
+  
+  select * from {{ ref('int_assign_session_ids') }}
+  
 ),
 
-set_first_visit_id_as_id as(
+pageviews_with_session_ids_ordered as(
   select 
-    stg_coffee_shop__pageviews.pageview_id,
-    get_first_visitor_id.visitor_id, 
-    stg_coffee_shop__pageviews.customer_id,
-    stg_coffee_shop__pageviews.device_type, 
-    stg_coffee_shop__pageviews.pageview_at, 
-    stg_coffee_shop__pageviews.page 
+    *
   from 
-    stg_coffee_shop__pageviews left join
-    get_first_visitor_id using(customer_id)
+    pageviews_with_session_ids
+  order by 
+    pageview_at 
 )
 
-select * from set_first_visit_id_as_id
+select * from pageviews_with_session_ids_ordered

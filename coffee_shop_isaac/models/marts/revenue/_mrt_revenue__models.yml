@@ -45,3 +45,20 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: customers_ltv
+    description: "Mart model with weekly lifetime value information for each customer."
+    columns:
+      - name: customer_week_id
+        description: "unique id for each customer / week"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+      - name: weeks_since_first_order
+        description: "weeks from first purchase, should be a positive integer"
+        data_type: int
+        data_tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"

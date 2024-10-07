@@ -16,7 +16,8 @@ models:
         data_type: int
         data_tests: 
           - not_null
-          - non_negative
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
 
   - name: int_determine_product_revenue_at_order_time
     description: "Intermediate model to determine product price and total revenue at order time.
@@ -39,7 +40,26 @@ models:
         data_tests:
           - unique
           - not_null
-    
+
+  - name: int_get_first_purchase_at_by_customer
+    description: "Intermediate model to get the first purchase_at by customer"
+    columns:
+      - name: customer_id
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+
+  - name: int_build_weekly_customer_revenue_history
+    description: "Intermediate model to prepare weekly customer history for a LTV curve model"
+    columns:
+      - name: customer_week_id
+        description: "a combination of the customer id and week id, hashed to md5"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
+  
   - name: int_get_first_web_visitor_id
     description: "Intermediate model to get the first visitor id for each customer"
     columns:

@@ -43,6 +43,14 @@ sources:
             data_tests: 
               - unique
               - not_null
-
-
+  - name: web_tracking
+    database: analytics-engineers-club
+    tables: 
+      - name: pageviews 
+        description: 'this table has pageviews from the coffee shop website'
+        columns: 
+          - name: id 
+            data_tests: 
+              - unique
+              - not_null
 

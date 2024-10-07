@@ -39,4 +39,14 @@ models:
         data_tests:
           - unique
           - not_null
+    
+  - name: int_get_first_web_visitor_id
+    description: "Intermediate model to get the first visitor id for each customer"
+    columns:
+      - name: customer_visitor_id
+        description: "a combination of the order id and visitor id, hashed to md5"
+        data_type: string
+        data_tests:
+          - unique
+          - not_null
 

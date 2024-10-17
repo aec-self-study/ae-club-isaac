@@ -1,4 +1,4 @@
-with stg_orders as (
+with orders as (
   
   select * from {{ ref('stg_coffee_shop__orders') }}
   
@@ -17,7 +17,7 @@ int_calculate_lifetime_order_number as (
     row_number() over(partition by customer_id order by order_created_at desc) lifetime_order_number, 
     order_created_at
   from
-    stg_orders
+    orders
 
 )
 

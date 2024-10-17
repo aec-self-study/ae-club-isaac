@@ -1,4 +1,4 @@
-with staging as (
+with pageviews as (
   
   select * from {{ ref('stg_web_tracking__pageviews') }}
 
@@ -11,7 +11,7 @@ calculate_visit_numbers_by_customer as(
     visitor_id, 
     row_number() over(partition by customer_id order by pageview_at) visit_number
   from 
-    staging
+    pageviews
   where
     customer_id is not null
   order by

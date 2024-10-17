@@ -1,4 +1,4 @@
-with mrt_customers as (
+with customers as (
   
   select * from {{ ref('customers') }}
   
@@ -13,7 +13,7 @@ select
     sum(order_revenue) as revenue,
     count(distinct(order_id)) as n_orders
 from
-    mrt_customers
+    customers
 group by
     customer_id, 
     order_week,
@@ -27,7 +27,7 @@ date_spine as(
     *
   from 
     unnest(generate_date_array(
-      date((select min(order_week) from calc_weekly_customer_revenue)),
+      date((select min(first_order_week) from calc_weekly_customer_revenue)),
       date((select max(order_week) from calc_weekly_customer_revenue)),
       interval 1 week)) as week
 

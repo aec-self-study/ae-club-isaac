@@ -1,19 +1,19 @@
-with stg_orders as (
+with orders as (
   
   select * from {{ ref('stg_coffee_shop__orders') }}
   
 ), 
 
-int_get_fist_purchase_by_customer as (
+int_get_first_purchase_by_customer as (
 
   select
     customer_id, 
     min(order_created_at) first_order_at
   from
-    stg_orders
+    orders
   group by 
     customer_id
 
 )
 
-select * from int_get_fist_purchase_by_customer
+select * from int_get_first_purchase_by_customer

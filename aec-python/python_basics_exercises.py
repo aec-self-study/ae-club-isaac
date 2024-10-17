@@ -1,3 +1,6 @@
+import numbers
+import decimal
+
 ## exercise 1
 #x = 10
 #while x > 0:
@@ -12,9 +15,6 @@
 #print(is_even('non int'))
 
 # exercise 4
-
-import numbers
-import decimal
 
 my_first_list = ['apple', 1, 'banana', 2] 
 cal_lookup = {'apple': 95, 'banana': 105, 'orange': 45}

@@ -1,3 +1,16 @@
+{{
+  config(
+    materialized = "table",
+    partition_by={
+      "field": "order_created_at",
+      "data_type": "timestamp",
+      "granularity": "day"
+    },
+    cluster_by = "customer_id"
+  )
+}}
+
+
 with orders_with_lifetime_order_number as(
 
 select * from {{ ref('int_calculate_lifetime_order_number') }}
@@ -36,7 +49,5 @@ from
   orders_with_lifetime_order_number inner join 
   customers on orders_with_lifetime_order_number.customer_id = customers.customer_id inner join 
   first_purchase_at on orders_with_lifetime_order_number.customer_id = first_purchase_at.customer_id
-order by 
-    order_customer_id
  
 

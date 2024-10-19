@@ -11,6 +11,9 @@ models:
         data_tests: 
           - unique
           - not_null
+    config:
+      grants:
+        roles/bigquery.dataViewer: ['user:claire@analyticsengineers.club']
 
   - name: customers
     description: "Mart model with customer level information for each order. This model is used to calculate revenue

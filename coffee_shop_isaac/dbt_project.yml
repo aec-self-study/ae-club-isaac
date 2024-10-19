@@ -25,3 +25,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
+
+vars:
+  github_source:
+    github_database: analytics-engineers-club
+    github_schema: github
+  github__using_repo_team: false

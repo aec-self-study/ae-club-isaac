@@ -11,6 +11,17 @@ sources:
             data_tests: 
               - unique
               - not_null
+          - name: total
+            description: this is total order revenue, not by product
+            data_tests:
+              - not_null
+              - greater_than_zero
+          - name: zip
+            data_tests: 
+              - us_zip_code: 
+                  config:
+                    severity: warn
+                    store_failures_as: view
       - name: products 
         description: 'there is more product information in the product_prices table'
         columns: 
@@ -26,11 +37,13 @@ sources:
             data_tests: 
               - unique
               - not_null
-          - name: revenue
-            description: this is total order revenue, not by product
-              - not_null
       - name: product_prices 
         description: 'this table has product prices by datetime'
+        data_tests:
+          - dbt_utils.mutually_exclusive_ranges:
+              lower_bound_column: created_at
+              upper_bound_column: ended_at
+              partition_by: product_id
         columns: 
           - name: id 
             data_tests: 
@@ -53,4 +66,9 @@ sources:
             data_tests: 
               - unique
               - not_null
+  - name: advanced_dbt_examples
+    project: analytics-engineers-club
+    tables:
+      - name: form_events
+      - name: favorite_ice_cream_flavors
 

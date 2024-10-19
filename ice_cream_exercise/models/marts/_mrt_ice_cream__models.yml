@@ -1,0 +1,12 @@
+version: 2
+
+models: 
+  - name: user_favorites
+    description: "Mart model with ice cream favorites by user by date"
+    columns: 
+      - name: user_dt_id
+        description: "a combination of user and date hashed to md5"
+        data_type: string
+        data_tests: 
+          - unique
+          - not_null
